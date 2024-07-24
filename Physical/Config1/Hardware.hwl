@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?AutomationStudio FileVersion="4.9"?>
+<BR.AS.HardwareTopology>
+  <TimeStamps>
+    <TimeStamp LogicalPath="Config1.Hardware.hw" LastWriteTime="07/24/2024 15:44:54" />
+  </TimeStamps>
+  <Modules>
+    <Module Name="X20CP1586" Type="X20CP1586" X="100" Y="100" />
+    <Module Name="8BVIxxxxxxDx.xxx-x" Type="8BVIxxxxxxDx.xxx-x" X="154.449951" Y="240.049988" />
+  </Modules>
+  <Links>
+    <Link From="8BVIxxxxxxDx.xxx-x" To="X20CP1586" FromPort="PLK1" ToPort="IF3" IsRoutedByUser="False">
+      <Point X="166.349976" Y="247.049988" />
+      <Point X="166.349976" Y="247.049988" />
+      <Point X="166.349976" Y="239.049988" />
+      <Point X="166.349976" Y="235" />
+      <Point X="156" Y="235" />
+      <Point X="156" Y="200" />
+      <Point X="156" Y="187" />
+      <Point X="156" Y="187" />
+    </Link>
+  </Links>
+  <InfoElements />
+</BR.AS.HardwareTopology>
