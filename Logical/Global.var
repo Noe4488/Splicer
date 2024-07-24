@@ -2,4 +2,5 @@ VAR
 	gAxReel_A : ACP10AXIS_typ;
 	gAxReel_B : ACP10AXIS_typ;
 	gVMaster : ACP10VAXIS_typ;
+	gAxTemplate : ACP10VAXIS_typ;
 END_VAR

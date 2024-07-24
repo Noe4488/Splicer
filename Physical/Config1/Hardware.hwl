@@ -2,14 +2,14 @@
 <?AutomationStudio FileVersion="4.9"?>
 <BR.AS.HardwareTopology>
   <TimeStamps>
-    <TimeStamp LogicalPath="Config1.Hardware.hw" LastWriteTime="07/24/2024 15:44:54" />
+    <TimeStamp LogicalPath="Config1.Hardware.hw" LastWriteTime="07/24/2024 15:47:43" />
   </TimeStamps>
   <Modules>
     <Module Name="X20CP1586" Type="X20CP1586" X="100" Y="100" />
-    <Module Name="8BVIxxxxxxDx.xxx-x" Type="8BVIxxxxxxDx.xxx-x" X="154.449951" Y="240.049988" />
+    <Module Name="8BVIxxxxxxDx.xxx-x" Type="8BVIxxxxxxDx.xxx-x" X="154" Y="240" />
   </Modules>
   <Links>
-    <Link From="8BVIxxxxxxDx.xxx-x" To="X20CP1586" FromPort="PLK1" ToPort="IF3" IsRoutedByUser="False">
+    <Link From="X20CP1586" To="8BVIxxxxxxDx.xxx-x" FromPort="IF3" ToPort="PLK1" IsRoutedByUser="False">
       <Point X="166.349976" Y="247.049988" />
       <Point X="166.349976" Y="247.049988" />
       <Point X="166.349976" Y="239.049988" />
