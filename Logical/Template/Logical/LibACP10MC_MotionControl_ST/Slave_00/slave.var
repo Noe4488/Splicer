@@ -1,0 +1,46 @@
+(*Actual step inside step sequencer*)
+VAR
+	SlaveStep : USINT; (*current  step in the step sequence*)
+END_VAR
+VAR CONSTANT
+	STATE_WAIT : USINT := 0; (*constant for a waiting step*)
+	STATE_POWER_ON : USINT := 1; (*constant for the step in which the controller is switched on*)
+	STATE_HOME : USINT := 2; (*constant for the step in which the axis is referenced*)
+	STATE_READY : USINT := 10; (*constant for a waiting step*)
+	STATE_HALT : USINT := 11; (*constant for the step in which movements are stopped*)
+	STATE_STOP : USINT := 12; (*constant for the step in which movements are stopped*)
+	STATE_JOG_POSITIVE : USINT := 13; (*constant for the step in which positive jogging movement is executed*)
+	STATE_JOG_NEGATIVE : USINT := 14; (*constant for the step in which negative jogging movement is executed*)
+	STATE_MOVE_ABSOLUTE : USINT := 15; (*constant for the step in which a movement to defined position is executed*)
+	STATE_MOVE_ADDITIVE : USINT := 16; (*constant for the step in which a movement with defined distance is executed*)
+	STATE_MOVE_VELOCITY : USINT := 17; (*constant for the step in which a movement with defined velocity is started*)
+	STATE_AUTOMAT_INIT : USINT := 30; (*constant for the step in which the automat is configured*)
+	STATE_AUTOMAT_START : USINT := 31; (*constant for the step in which the automat is started*)
+	STATE_AUTOMAT_STOP : USINT := 32; (*constant for the step in which the automat is stopped*)
+	STATE_AUTOMAT_RESTART : USINT := 33; (*constant for the step in which the automat is restarted*)
+	STATE_AUTOMAT_END : USINT := 34; (*constant for the step in which the automat is finished*)
+END_VAR
+(*Index of the used axis*)
+VAR CONSTANT
+	SLAVE_INDEX : USINT := 0; (*Index of the used axis*)
+END_VAR
+(*Configuration data of the automat*)
+VAR
+	AutData : MC_AUTDATA_TYP; (*configuration of the automat*)
+END_VAR
+(*Function Blocks*)
+VAR
+	MC_BR_AutCommand_0 : MC_BR_AutCommand; (*Function Block*)
+	MC_BR_InitAutData_0 : MC_BR_InitAutData; (*Function Block*)
+	MC_BR_ReadDriveStatus_0 : MC_BR_ReadDriveStatus; (*Function Block *)
+	MC_Halt_0 : MC_Halt; (*Function Block *)
+	MC_Home_0 : MC_Home; (*Function Block *)
+	MC_MoveAbsolute_0 : MC_MoveAbsolute; (*Function Block *)
+	MC_MoveAdditive_0 : MC_MoveAdditive; (*Function Block *)
+	MC_MoveVelocity_0 : MC_MoveVelocity; (*Function Block *)
+	MC_Power_0 : MC_Power; (*Function Block *)
+	MC_ReadActualPosition_0 : MC_ReadActualPosition; (*Function Block *)
+	MC_ReadActualVelocity_0 : MC_ReadActualVelocity; (*Function Block *)
+	MC_ReadStatus_0 : MC_ReadStatus; (*Function Block *)
+	MC_Stop_0 : MC_Stop; (*Function Block *)
+END_VAR

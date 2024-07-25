@@ -40,4 +40,17 @@
       </Group>
     </Selector>
   </Element>
+  <Element ID="gTemplateLink" Type="mpaxisbasic">
+    <Selector ID="AxisConfiguration" Value="AxisWithConfiguration">
+      <Group ID="Drive">
+        <Group ID="Controller">
+          <Group ID="LoopFilters">
+            <Selector ID="[0]" />
+            <Selector ID="[1]" />
+            <Selector ID="[2]" />
+          </Group>
+        </Group>
+      </Group>
+    </Selector>
+  </Element>
 </Configuration>

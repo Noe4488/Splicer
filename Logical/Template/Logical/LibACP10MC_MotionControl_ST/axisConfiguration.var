@@ -1,0 +1,24 @@
+VAR CONSTANT
+	PSM_NUMBER : USINT := 1; (*number of used power supply modules*)
+	AXIS_NUMBER : USINT := 2; (*number of used single axes*)
+	MASTER_NUMBER : USINT := 1; (*number of used master axes*)
+	SLAVE_NUMBER : USINT := 1; (*number of used slave axes*)
+	TOTAL_AXES : USINT := PSM_NUMBER + AXIS_NUMBER + MASTER_NUMBER + SLAVE_NUMBER; (*total number of used axes*)
+	PSM_MAX_INDEX : USINT := PSM_NUMBER-1; (*highest index for single axis*)
+	AXIS_MAX_INDEX : USINT := AXIS_NUMBER-1; (*highest index for single axes*)
+	MASTER_MAX_INDEX : USINT := MASTER_NUMBER-1; (*highest index for master axes*)
+	SLAVE_MAX_INDEX : USINT := SLAVE_NUMBER-1; (*highest index for slave axes*)
+END_VAR
+VAR
+	PsmRef : ARRAY[0..PSM_MAX_INDEX] OF UDINT; (*psm reference handle*)
+	AxisRef : ARRAY[0..AXIS_MAX_INDEX] OF UDINT; (*axis reference handle*)
+	MasterRef : ARRAY[0..MASTER_MAX_INDEX] OF UDINT; (*master reference handle*)
+	SlaveRef : ARRAY[0..SLAVE_MAX_INDEX] OF UDINT; (*slave reference handle*)
+	GlobalCommand : global_command_typ; (*command structure for global command*)
+	GlobalError : global_error_typ; (*error structure for global error*)
+	PowerSupply : ARRAY[0..PSM_MAX_INDEX] OF psm_typ; (*handling structure for power supply module*)
+	Axis : ARRAY[0..AXIS_MAX_INDEX] OF axis_typ; (*handling structure for single axis*)
+	Master : ARRAY[0..MASTER_MAX_INDEX] OF axis_typ; (*handling structure for master axis*)
+	Slave : ARRAY[0..SLAVE_MAX_INDEX] OF slave_typ; (*handling structure for slave axis*)
+	PowerSupplyOn : BOOL; (*power supply on flag*)
+END_VAR

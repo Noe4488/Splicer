@@ -1,0 +1,34 @@
+(*Index variables*)
+VAR
+	configAxisIndex : USINT; (*count variable for configurating "for"-loops*)
+	totalAxisIndex : USINT; (*count variable for all axes acting "for"-loops*)
+	psmIndex : USINT;
+	axisIndex : USINT; (*count variable for single axes acting "for"-loops*)
+	masterIndex : USINT; (*count variable for master axes acting "for"-loops*)
+	slaveIndex : USINT; (*count variable for slave axes acting "for"-loops*)
+END_VAR
+(*Actual steps inside the step sequences*)
+VAR
+	ErrorStep : USINT; (*current step in the step sequence*)
+	AcknowledgeStep : USINT; (*current step in the acknowledge step sequence *)
+END_VAR
+(*Error Steps*)
+VAR CONSTANT
+	STATE_CONFIG_FBS : USINT := 0; (*constant for the step in which the function blocks are configured*)
+	STATE_WAIT : USINT := 1; (*constant for the step in which it is waited for a occuring error*)
+	STATE_ERROR_HANDLING : USINT := 2; (*constant for the step in which all necessary axes are stopped *)
+	STATE_INTERNAL_ERROR : USINT := 3; (*constant for the step in which all function blocks are disabled in case of an FB error*)
+END_VAR
+(*Acknowledge Steps*)
+VAR CONSTANT
+	STATE_ERROR_SCAN : USINT := 10; (*constant for the step in which the first active is searched*)
+	STATE_ERROR_ACKNOWLEDGE : USINT := 11; (*constant for the step in which the actual output error is acknowledged after user command*)
+	STATE_RESET : USINT := 12; (*constant for the step in which the axes are reset after all errors where acknowled*)
+END_VAR
+(*Function Blocks*)
+VAR
+	MC_BR_AxisErrorCollector_0 : MC_BR_AxisErrorCollector; (*Function Block*)
+	MC_BR_ReadAxisError_0 : ARRAY[0..TOTAL_AXES] OF MC_BR_ReadAxisError; (*Function Block*)
+	MC_ReadStatus_0 : ARRAY[0..TOTAL_AXES] OF MC_ReadStatus; (*Function Block*)
+	MC_Reset_0 : MC_Reset; (*Function Block*)
+END_VAR

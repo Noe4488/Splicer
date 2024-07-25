@@ -1,0 +1,16 @@
+VAR CONSTANT
+	PSM_INDEX : USINT := 0;
+	STATE_READY : USINT := 0;
+	STATE_POWER_ON : USINT := 1;
+	STATE_POWER_OFF : USINT := 2;
+	STATE_START_POWERMETER : USINT := 3;
+	STATE_STOP_POWERMETER : USINT := 4;
+	STATE_RESTART_INTERVAL : USINT := 5;
+END_VAR
+VAR
+	MC_Power_0 : MC_Power;
+	MC_BR_PowerMeter_0 : MC_BR_PowerMeter;
+	MC_BR_ReadDriveStatus_0 : MC_BR_ReadDriveStatus;
+	MC_ReadStatus_0 : MC_ReadStatus;
+	PsmStep : USINT;
+END_VAR
