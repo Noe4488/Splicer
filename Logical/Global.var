@@ -3,5 +3,5 @@ VAR
 	gAxReel_B : ACP10AXIS_typ;
 	gVMaster : ACP10VAXIS_typ;
 	gAxTemplate : ACP10VAXIS_typ;
-	gAxis : ARRAY[0..3] OF gAxisControl_type;
+	gAxis : ARRAY[0..MAX_AXIS] OF gAxisControl_type;
 END_VAR

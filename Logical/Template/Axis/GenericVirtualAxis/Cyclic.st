@@ -4,9 +4,9 @@ PROGRAM _CYCLIC
 	(**** Call Subroutines ****)
 	
 	Act_Config;
+	Act_Parameters;
 	
 	(**************************)
-	
 	
 	//--- Checks is the motor is powered On
 	
@@ -47,11 +47,14 @@ PROGRAM _CYCLIC
 		
 	END_CASE
 	
+	gAxis[AxisIndex].Status.Active := AxisBasic.Active;
+	gAxis[AxisIndex].Status.PoweredOn := AxisBasic.PowerOn;
+	gAxis[AxisIndex].Status.Homed:= AxisBasic.IsHomed;
+	
 	(********** Call FB's **********)
 	
 	AxisBasic();
 	AxisConfig();
-	//AxisCam();
 	
- 	(*******************************)
+	(*******************************)
 END_PROGRAM

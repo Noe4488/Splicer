@@ -3,10 +3,13 @@ VAR
 	AxisBasicPar : MpAxisBasicParType;
 	AxisConfig : MpAxisBasicConfig;
 	AxisConfigPar : MpAxisBasicConfigType;
+	AxisCoupling : MpAxisCoupling;
+	AxisCouplingPar : MpAxisCouplingParType;
 	StAxis : AxisState_enum;
 	Direction : MpAxisMotorDirectionEnum;
 	StConfig : ConfigStates_enum;
 	MpLink : MpComIdentType;
+	MpLinkMaster : MpComIdentType;
 	AxisIndex : USINT;
 	AxisConfigDone : BOOL;
 	AxisConfigReq : BOOL;
@@ -25,4 +28,5 @@ VAR
 	HeadNumber : REAL;
 	Resolution : REAL;
 	ConfigDone : BOOL;
+	ReadAxisError : MC_ReadAxisError;
 END_VAR

@@ -10,6 +10,7 @@
   <TaskClass Name="Cyclic#4">
     <Task Name="GenericAxi" Source="Template.Axis.GenericAxis.prg" Memory="UserROM" Language="IEC" Debugging="true" />
     <Task Name="VMaster" Source="MotionControl.AxisControl.VMaster.prg" Memory="UserROM" Language="IEC" Debugging="true" />
+    <Task Name="MainContro" Source="MotionControl.Winder.LineControl.MainControl.prg" Memory="UserROM" Language="IEC" Debugging="true" />
   </TaskClass>
   <TaskClass Name="Cyclic#5" />
   <TaskClass Name="Cyclic#6" />

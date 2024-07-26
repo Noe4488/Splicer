@@ -4,16 +4,22 @@ PROGRAM _CYCLIC
 	(**** Call Subroutines ****)
 	
 	Act_Config;
+	Act_Parameters;
 	
 	(**************************)
 	
 	
-	//--- Checks is the motor is powered On
+	(**** Checks is the motor is powered On ****)
 	
 	IF NOT gAxis[AxisIndex].Command.PowerOn THEN 
 		StAxis := STATE_WAIT;
 	END_IF
 	
+	(**** Checks the motor error ****)
+	
+	IF AxisBasic.Error OR AxisConfig.Error OR AxisCoupling.Error THEN 
+		StAxis:= STATE_ERROR;
+	END_IF
 	
 	(**** Axis Sequencer ****)
 	
@@ -46,14 +52,39 @@ PROGRAM _CYCLIC
 		
 		STATE_READY:
 		
+			IF gAxis[AxisIndex].Command.Auto THEN 
+				StAxis:= STATE_AUTO;
+			END_IF
+			
+		STATE_AUTO:
+			
+			IF AxisCoupling.Info.MasterReady AND AxisCoupling.Info.SlaveReady AND gAxis[AxisIndex].Command.Auto THEN 
+				AxisCoupling.Gear := TRUE;
+			ELSIF NOT AxisCoupling.Info.MasterReady OR NOT AxisCoupling.Info.SlaveReady THEN
+				StAxis:= STATE_ERROR;
+			ELSIF NOT gAxis[AxisIndex].Command.Auto THEN
+				
+				AxisCoupling.Gear := FALSE;
+				
+				IF NOT AxisCoupling.InSync THEN
+					StAxis:= STATE_READY;
+				END_IF
+				
+			END_IF
+		
+		STATE_ERROR:
+		
+				
 		
 	END_CASE
+	
 	
 	(********** Call FB's **********)
 	
 	AxisBasic();
 	AxisConfig();
-	//AxisCam();
+	AxisCoupling();
+	ReadAxisError();
 	
  	(*******************************)
 END_PROGRAM

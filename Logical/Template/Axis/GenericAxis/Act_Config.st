@@ -1,46 +1,29 @@
 
 ACTION Act_Config: 
 	
-	//---- Numero del Eje ----///
-	AxisIndex := GENERIC;
+	gAxis[AxisIndex].Status.Active 		:= AxisBasic.Active;
+	gAxis[AxisIndex].Status.PoweredOn 	:= AxisBasic.PowerOn;
+	gAxis[AxisIndex].Status.Homed		:= AxisBasic.IsHomed;
+	gAxis[AxisIndex].Status.Auto 		:= AxisCoupling.InSync;
 	
-	//---- MpLink ----//
-	MpLink 			:= gTemplateLink;
-	Axis 			:= ADR(gAxTemplate);
-	//MpLinkMaster;
+	AxisBasic.Enable 	:= gAxis[AxisIndex].Command.Enable;
+	AxisCoupling.Enable := AxisBasic.Active;
+	AxisConfig.Enable 	:= AxisBasic.Active;
 	
-	//---- Nombre del eje ----//
-	AxisName := 'Eje Generico';
+	(**** Definicion sentido de giro del eje *****)
 	
-	//---- Hablita el eje ----//
-	gAxis[AxisIndex].Command.Enable := TRUE; // ESTE DATA DEBERA SER USADO EN UN VARIABLE DE LA CONFIGURACION MAQUINA PARA HABILITAR O DESHABILITAR UN EJE.
-	
-	//---- Limite de velocidad -----//
-	LimitSpeed 	:= 6600.0;
-	
-	//----- Limete de aceleracion/desaceleracion ----//
-	LimitAccDec := 6600.0;
-	
-	//---- Relacion de velocoidad motor/reductor ----// 
-	GearIn 	:= 1;
-	GearOut := 1;
-	
-	//---- Seleccion direccion de rotacion del eje ----//
-	AxisDirection := TRUE; // TRUE = sentido de las manesillas del reloj; FALSE = en contra de las manesillas del reloj;
-	
-	// ---- Definicion sentido de giro del eje ----//
 	IF AxisDirection THEN
 		Direction	:= mpAXIS_DIR_CLOCKWISE;
 	ELSE
 		Direction	:= mpAXIS_DIR_COUNTERCLOCKWISE;
 	END_IF
 	
-	// ---- Definicion Paramentros de posicion del eje ----//
-	HeadNumber 			:= 1;
-	Period 				:= 360.0 * HeadNumber;
-	SectorNumber 		:= 1;
-	Resolution			:= 0.01;
-	/////////////////////////////////////////////////////////////////
+	(**** Configuracion AxisCoupling *****)
+	
+	AxisCouplingPar.RatioNumerator 		:= 1;
+	AxisCouplingPar.RatioDenominator 	:= 1;
+	AxisCouplingPar.Gear.Acceleration;
+	AxisCouplingPar.Gear.Deceleration;
 	
 	(**** Secuencia configuarcion Eje *****)
 	
@@ -113,25 +96,23 @@ ACTION Act_Config:
 		
 	END_CASE
 	
-	//	gAxis[AxisIndex].Cmd.ConfigReq := StConfig = CONFIG_LOAD_REQ;
-	//	gAxis[AxisIndex].Sts.ConfigDone := StConfig = CONFIG_SAVE_DONE;
-	
-	AxisBasic.Enable 	:= gAxis[AxisIndex].Command.Enable;
-	AxisConfig.Enable 	:= AxisBasic.Active;
 	
 	(********** FB's Configuration *********)
 	
-	AxisBasic.Axis 		:= Axis;
-	AxisBasic.MpLink 	:= ADR(MpLink);
-	AxisBasic.Parameters := ADR(AxisBasicPar);
+	AxisBasic.Axis 				:= Axis;
+	AxisBasic.MpLink 			:= ADR(MpLink);
+	AxisBasic.Parameters 		:= ADR(AxisBasicPar);
 	
 	AxisConfig.MpLink 			:= ADR(MpLink);
 	AxisConfig.Configuration 	:= ADR(AxisConfigPar);
 	
 	
-	//	AxisCam.MpLink				:= ADR(MpLink);
-	//	AxisCam.MpLinkMaster		:= ADR(MpLinkMaster);
-	//	AxisCam.Parameters			:= ADR(AxisCamPar);
+	AxisCoupling.MpLink			:= ADR(MpLink);
+	AxisCoupling.MpLinkMaster	:= ADR(MpLinkMaster);
+	AxisCoupling.Parameters		:= ADR(AxisCouplingPar);
+	
+	ReadAxisError.Axis := Axis;
+	(*ReadAxisError.*)
 	
 	(****************************************)
 

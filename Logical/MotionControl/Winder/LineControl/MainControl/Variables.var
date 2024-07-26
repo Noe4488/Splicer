@@ -1,0 +1,5 @@
+VAR
+	StLineCtrl : AxisState_enum;
+	i : INT;
+	Auto : BOOL;
+END_VAR

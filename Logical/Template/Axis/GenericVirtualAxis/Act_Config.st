@@ -1,32 +1,6 @@
 
 ACTION Act_Config: 
 	
-	//---- Numero del Eje ----///
-	AxisIndex := REEL_A;
-	
-	//---- MpLink ----//
-	MpLink 			:= gAxReelA_Link;
-	Axis 			:= ADR(gAxReel_A);
-	//MpLinkMaster;
-	
-	//---- Nombre del eje ----//
-	AxisName := 'Reel A';
-	
-	//---- Hablita el eje ----//
-	gAxis[AxisIndex].Command.Enable := TRUE; // ESTE DATA DEBERA SER USADO EN UN VARIABLE DE LA CONFIGURACION MAQUINA PARA HABILITAR O DESHABILITAR UN EJE.
-	
-	//---- Limite de velocidad -----//
-	LimitSpeed 	:= 6600.0;
-	
-	//----- Limete de aceleracion/desaceleracion ----//
-	LimitAccDec := 6600.0;
-	
-	//---- Relacion de velocoidad motor/reductor ----// 
-	GearIn 	:= 1;
-	GearOut := 1;
-	
-	//---- Seleccion direccion de rotacion del eje ----//
-	AxisDirection := TRUE; // TRUE = sentido de las manesillas del reloj; FALSE = en contra de las manesillas del reloj;
 	
 	// ---- Definicion sentido de giro del eje ----//
 	IF AxisDirection THEN
@@ -35,11 +9,7 @@ ACTION Act_Config:
 		Direction	:= mpAXIS_DIR_COUNTERCLOCKWISE;
 	END_IF
 	
-	// ---- Definicion Paramentros de posicion del eje ----//
-	HeadNumber 			:= 1;
-	Period 				:= 360.0 * HeadNumber;
-	SectorNumber 		:= 1;
-	Resolution			:= 0.01;
+	
 	/////////////////////////////////////////////////////////////////
 	
 	(**** Secuencia configuarcion Eje *****)
@@ -113,26 +83,19 @@ ACTION Act_Config:
 		
 	END_CASE
 	
-	//	gAxis[AxisIndex].Cmd.ConfigReq := StConfig = CONFIG_LOAD_REQ;
-	//	gAxis[AxisIndex].Sts.ConfigDone := StConfig = CONFIG_SAVE_DONE;
-	
 	AxisBasic.Enable 	:= gAxis[AxisIndex].Command.Enable;
 	AxisConfig.Enable 	:= AxisBasic.Active;
 	
 	(********** FB's Configuration *********)
 	
-	AxisBasic.Axis 		:= Axis;
-	AxisBasic.MpLink 	:= ADR(MpLink);
-	AxisBasic.Parameters := ADR(AxisBasicPar);
+	AxisBasic.Axis 				:= Axis;
+	AxisBasic.MpLink 			:= ADR(MpLink);
+	AxisBasic.Parameters 		:= ADR(AxisBasicPar);
 	
 	AxisConfig.MpLink 			:= ADR(MpLink);
 	AxisConfig.Configuration 	:= ADR(AxisConfigPar);
 	
-	
-	//	AxisCam.MpLink				:= ADR(MpLink);
-	//	AxisCam.MpLinkMaster		:= ADR(MpLinkMaster);
-	//	AxisCam.Parameters			:= ADR(AxisCamPar);
-	
 	(****************************************)
+
 
 END_ACTION

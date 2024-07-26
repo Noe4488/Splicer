@@ -4,7 +4,8 @@
   <Files>
     <File Description="Cyclic code" Reference="true">\Logical\Template\Axis\GenericAxis\Cyclic.st</File>
     <File Description="Init code" Reference="true">\Logical\Template\Axis\GenericAxis\Init.st</File>
-    <File>Act_Config.st</File>
+    <File Reference="true">\Logical\Template\Axis\GenericAxis\Act_Config.st</File>
+    <File>Act_Parameters.st</File>
     <File Description="Local data types" Private="true" Reference="true">\Logical\Template\Axis\GenericAxis\Types.typ</File>
     <File Description="Local variables" Private="true" Reference="true">\Logical\Template\Axis\GenericAxis\Variables.var</File>
   </Files>

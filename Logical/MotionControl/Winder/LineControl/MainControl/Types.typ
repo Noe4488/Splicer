@@ -1,0 +1,15 @@
+
+TYPE
+	AxisState_enum : 
+		(
+		STATE_WAIT := 0,
+		STATE_POWER_ON := 10,
+		STATE_ERROR := 20,
+		STATE_STOP := 30,
+		STATE_READY := 40,
+		STATE_HOME := 50,
+		STATE_AUTO := 60,
+		STATE_MANUAL := 70,
+		STATE_MAINT := 80
+		);
+END_TYPE
