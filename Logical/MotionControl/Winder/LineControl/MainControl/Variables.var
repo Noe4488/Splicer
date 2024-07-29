@@ -2,4 +2,8 @@ VAR
 	StLineCtrl : AxisState_enum;
 	i : INT;
 	Auto : BOOL;
+	ErrorIndex : INT;
+	Stop : BOOL;
+	Start : BOOL;
+	Reset : BOOL;
 END_VAR

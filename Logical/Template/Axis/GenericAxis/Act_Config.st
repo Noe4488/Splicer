@@ -5,11 +5,23 @@ ACTION Act_Config:
 	gAxis[AxisIndex].Status.PoweredOn 	:= AxisBasic.PowerOn;
 	gAxis[AxisIndex].Status.Homed				:= AxisBasic.IsHomed;
 	gAxis[AxisIndex].Status.Auto 				:= AxisCoupling.InSync;
+	gAxis[AxisIndex].Status.Error 			:= AxisBasic.Error OR AxisConfig.Error OR AxisCoupling.Error;
 	
 	AxisBasic.Enable 				:= gAxis[AxisIndex].Command.Enable;
 	AxisCoupling.Enable 		:= AxisBasic.Active;
 	AxisConfig.Enable 			:= AxisBasic.Active;
 	ReadAxisError.Enable 		:= AxisBasic.Error;
+	
+	IF gAxis[AxisIndex].Command.Reset THEN 
+		AxisBasic.ErrorReset := TRUE;
+		AxisCoupling.ErrorReset := TRUE;
+		AxisConfig.ErrorReset := TRUE;
+	ELSE
+		AxisBasic.ErrorReset := FALSE;
+		AxisCoupling.ErrorReset := FALSE;
+		AxisConfig.ErrorReset := FALSE;
+	END_IF
+	
 	
 	(**** Definicion sentido de giro del eje *****)
 	

@@ -2,8 +2,23 @@
 ACTION Act_Config: 
 	
 	AxisBasic.Enable 			:= gAxis[AxisIndex].Command.Enable;
+	AxisBasic.Stop := gAxis[AxisIndex].Command.Stop;
 	AxisConfig.Enable 		:= AxisBasic.Active;
 	ReadAxisError.Enable 	:= AxisBasic.Error;
+	
+	IF gAxis[AxisIndex].Command.Reset THEN 
+		AxisBasic.ErrorReset := TRUE;
+		AxisConfig.ErrorReset := TRUE;
+	ELSE
+		AxisBasic.ErrorReset := FALSE;
+		AxisConfig.ErrorReset := FALSE;
+	END_IF
+	
+	gAxis[AxisIndex].Status.Active := AxisBasic.Active;
+	gAxis[AxisIndex].Status.PoweredOn := AxisBasic.PowerOn;
+	gAxis[AxisIndex].Status.Homed:= AxisBasic.IsHomed;
+	gAxis[AxisIndex].Status.Stop := AxisBasic.Stopped;
+	gAxis[AxisIndex].Status.Error := AxisBasic.Error OR AxisConfig.Error;
 	
 	(**** Configuracion FB Read Axis Error ****)
 	

@@ -11,16 +11,21 @@ TYPE
 		Error : BOOL;
 		Active : BOOL;
 		Auto : BOOL;
+		Stop : BOOL;
 	END_STRUCT;
 	gAxisCommand_type : 	STRUCT 
 		PowerOn : BOOL;
 		Enable : BOOL;
 		Auto : BOOL;
 		Manual : BOOL;
+		Start : BOOL;
+		Stop : BOOL;
+		Reset : BOOL;
 	END_STRUCT;
 	gAxisParameters_type : 	STRUCT 
 		Speed : REAL;
 		Acc : REAL;
 		Decel : REAL;
+		Position : REAL;
 	END_STRUCT;
 END_TYPE

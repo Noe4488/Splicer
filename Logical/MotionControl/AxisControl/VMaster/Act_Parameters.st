@@ -10,7 +10,7 @@ ACTION Act_Parameters:
 	//MpLinkMaster;
 	
 	//---- Nombre del eje ----//
-	AxisName 		:= 'Eje Generico';
+	AxisName 		:= 'Virtual Master';
 	
 	//---- Hablita el eje ----//
 	gAxis[AxisIndex].Command.Enable := TRUE; // ESTE DATA DEBERA SER USADO EN UN VARIABLE DE LA CONFIGURACION MAQUINA PARA HABILITAR O DESHABILITAR UN EJE.

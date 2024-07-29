@@ -8,6 +8,7 @@ PROGRAM _CYCLIC
 	
 	(**************************)
 	
+	
 	(**** Speed Control ****)
 	
 	AxisBasicPar.Velocity := gAxis[AxisIndex].Parameters.Speed;
@@ -56,12 +57,16 @@ PROGRAM _CYCLIC
 		
 		STATE_READY:
 		
+			AxisBasic.MoveVelocity := gAxis[AxisIndex].Command.Start;
 		
+		STATE_ERROR :
+		
+			
+		
+			
 	END_CASE
 	
-	gAxis[AxisIndex].Status.Active := AxisBasic.Active;
-	gAxis[AxisIndex].Status.PoweredOn := AxisBasic.PowerOn;
-	gAxis[AxisIndex].Status.Homed:= AxisBasic.IsHomed;
+	
 	
 	(********** Call FB's **********)
 	
