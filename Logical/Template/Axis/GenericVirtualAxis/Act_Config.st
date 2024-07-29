@@ -1,8 +1,20 @@
 
 ACTION Act_Config: 
 	
+	AxisBasic.Enable 			:= gAxis[AxisIndex].Command.Enable;
+	AxisConfig.Enable 		:= AxisBasic.Active;
+	ReadAxisError.Enable 	:= AxisBasic.Error;
 	
-	// ---- Definicion sentido de giro del eje ----//
+	(**** Configuracion FB Read Axis Error ****)
+	
+	ReadAxisError.Configuration.Format := mcWRAP;   //ReadAxisErrorPar;
+	ReadAxisError.Configuration.LineLength := SIZEOF(ErrorText[0]);
+	ReadAxisError.Configuration.DataLength := SIZEOF(ErrorText);
+	ReadAxisError.Configuration.DataAddress := ADR(ErrorText[0]);
+	ReadAxisError.Configuration.DataObjectName := 'acp10etxen';
+	
+	(**** Definicion sentido de giro del eje ****)
+	
 	IF AxisDirection THEN
 		Direction	:= mpAXIS_DIR_CLOCKWISE;
 	ELSE
@@ -83,8 +95,6 @@ ACTION Act_Config:
 		
 	END_CASE
 	
-	AxisBasic.Enable 	:= gAxis[AxisIndex].Command.Enable;
-	AxisConfig.Enable 	:= AxisBasic.Active;
 	
 	(********** FB's Configuration *********)
 	
@@ -94,6 +104,9 @@ ACTION Act_Config:
 	
 	AxisConfig.MpLink 			:= ADR(MpLink);
 	AxisConfig.Configuration 	:= ADR(AxisConfigPar);
+	
+	ReadAxisError.Axis := Axis;
+	ReadAxisError.Mode := mcTEXT;
 	
 	(****************************************)
 

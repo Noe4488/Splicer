@@ -1,14 +1,15 @@
 
 ACTION Act_Config: 
 	
-	gAxis[AxisIndex].Status.Active 		:= AxisBasic.Active;
+	gAxis[AxisIndex].Status.Active 			:= AxisBasic.Active;
 	gAxis[AxisIndex].Status.PoweredOn 	:= AxisBasic.PowerOn;
-	gAxis[AxisIndex].Status.Homed		:= AxisBasic.IsHomed;
-	gAxis[AxisIndex].Status.Auto 		:= AxisCoupling.InSync;
+	gAxis[AxisIndex].Status.Homed				:= AxisBasic.IsHomed;
+	gAxis[AxisIndex].Status.Auto 				:= AxisCoupling.InSync;
 	
-	AxisBasic.Enable 	:= gAxis[AxisIndex].Command.Enable;
-	AxisCoupling.Enable := AxisBasic.Active;
-	AxisConfig.Enable 	:= AxisBasic.Active;
+	AxisBasic.Enable 				:= gAxis[AxisIndex].Command.Enable;
+	AxisCoupling.Enable 		:= AxisBasic.Active;
+	AxisConfig.Enable 			:= AxisBasic.Active;
+	ReadAxisError.Enable 		:= AxisBasic.Error;
 	
 	(**** Definicion sentido de giro del eje *****)
 	
@@ -24,6 +25,14 @@ ACTION Act_Config:
 	AxisCouplingPar.RatioDenominator 	:= 1;
 	AxisCouplingPar.Gear.Acceleration;
 	AxisCouplingPar.Gear.Deceleration;
+	
+	(**** Configuracion FB Read Axis Error ****)
+	
+	ReadAxisError.Configuration.Format := mcWRAP;   //ReadAxisErrorPar;
+	ReadAxisError.Configuration.LineLength := SIZEOF(ErrorText[0]);
+	ReadAxisError.Configuration.DataLength := SIZEOF(ErrorText);
+	ReadAxisError.Configuration.DataAddress := ADR(ErrorText[0]);
+	ReadAxisError.Configuration.DataObjectName := 'acp10etxen';
 	
 	(**** Secuencia configuarcion Eje *****)
 	
@@ -99,20 +108,21 @@ ACTION Act_Config:
 	
 	(********** FB's Configuration *********)
 	
-	AxisBasic.Axis 				:= Axis;
-	AxisBasic.MpLink 			:= ADR(MpLink);
+	AxisBasic.Axis 					:= Axis;
+	AxisBasic.MpLink 				:= ADR(MpLink);
 	AxisBasic.Parameters 		:= ADR(AxisBasicPar);
 	
-	AxisConfig.MpLink 			:= ADR(MpLink);
+	AxisConfig.MpLink 				:= ADR(MpLink);
 	AxisConfig.Configuration 	:= ADR(AxisConfigPar);
 	
 	
-	AxisCoupling.MpLink			:= ADR(MpLink);
+	AxisCoupling.MpLink				:= ADR(MpLink);
 	AxisCoupling.MpLinkMaster	:= ADR(MpLinkMaster);
 	AxisCoupling.Parameters		:= ADR(AxisCouplingPar);
 	
 	ReadAxisError.Axis := Axis;
-	(*ReadAxisError.*)
+	ReadAxisError.Mode := mcTEXT;
+
 	
 	(****************************************)
 

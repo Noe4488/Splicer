@@ -8,7 +8,19 @@ PROGRAM _CYCLIC
 	
 	(**************************)
 	
-	//--- Checks is the motor is powered On
+	(**** Speed Control ****)
+	
+	AxisBasicPar.Velocity := gAxis[AxisIndex].Parameters.Speed;
+	
+	IF OldVelocity <> AxisBasicPar.Velocity THEN
+		AxisBasic.Update := TRUE;
+		OldVelocity := AxisBasicPar.Velocity;
+	ELSE
+		AxisBasic.Update := FALSE;
+	END_IF
+	
+		
+	(**** Checks is the motor is powered On ****)
 	
 	IF NOT gAxis[AxisIndex].Command.PowerOn THEN 
 		StAxis := STATE_WAIT;
@@ -55,6 +67,7 @@ PROGRAM _CYCLIC
 	
 	AxisBasic();
 	AxisConfig();
+	ReadAxisError();
 	
 	(*******************************)
 END_PROGRAM

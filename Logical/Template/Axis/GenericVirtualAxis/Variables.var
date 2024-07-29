@@ -25,4 +25,7 @@ VAR
 	HeadNumber : REAL;
 	Resolution : REAL;
 	ConfigDone : BOOL;
+	ReadAxisError : MC_BR_ReadAxisError;
+	ErrorText : ARRAY[0..3] OF STRING[79];
+	OldVelocity : REAL;
 END_VAR
